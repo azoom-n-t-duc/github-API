@@ -1,0 +1,23 @@
+{
+  "name": "github-api",
+  "version": "1.0.0",
+  "description": "My well-made Nuxt.js project",
+  "author": "Nguyen Tai Duc",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "ky": "^0.17.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
+    "sass-loader": "^8.0.2"
+  }
+}
