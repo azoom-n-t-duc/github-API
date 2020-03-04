@@ -1,5 +1,8 @@
 
 export default {
+  generate: {
+    subFolders: false
+  },
   mode: 'universal',
   /*
   ** Headers of the page

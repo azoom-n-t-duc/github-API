@@ -1,14 +1,14 @@
 <template>
   <div>
    
-    <div v-for="item in data" :key="item.login" style="box-sizing: border-box">
+    <div v-for="user in items" :key="user.id" style="box-sizing: border-box">
         <li class="contrib-person float-left col-6 pr-2 my-2 Box"  style="display: block;">
             <span class="d-block "><h3 class="border-bottom p-2 lh-condensed">
-                <a data-hovercard-type="user" data-hovercard-url="/users/azoom-suzuki/hovercard"  class="d-inline-block mr-2 float-left">
-                    <img :src="item.avatar_url" class="avatar" alt="azoom-suzuki" width="38" height="38">
+                <a data-hovercard-type="user" data-hovercard-url="/users/azoom-suzuki/hovercard" class="d-inline-block mr-2 float-left">
+                    <img :src="user.avatar_url" class="avatar" alt="azoom-suzuki" width="38" height="38">
                 </a>
-                <a data-hovercard-type="user" data-hovercard-url="/users/azoom-suzuki/hovercard" class="text-normal" >{{ item.login }} </a>
-             <span class="f6 d-block text-gray-light"><span class="cmeta">Type: {{ item.type }}&nbsp;&nbsp;
+                 <nuxt-link :to="user.id+''" class="text-normal">{{ user.login }}</nuxt-link>
+             <span class="f6 d-block text-gray-light"><span class="cmeta">Type: {{ user.type }}&nbsp;&nbsp;
              <span class="text-green text-normal"></span>&nbsp;&nbsp;
              <span class="text-red text-normal"></span></span></span>
           </h3>
@@ -22,29 +22,20 @@
 <script>
 import Logo from "~/components/Logo.vue";
 import axios from "~/plugins/ky.js";
+import { mapGetters } from 'vuex'
 
 export default {
   layout: 'home',
-  data() {
-    return {
-      data: []
-    };
-  },
-
-  created() {
-    this.$nextTick(() => {
-      axios
-        .get("repos/azoom/admin-carparking/contributors")
-        .then(({ data }) => {
-          this.data = data;
-        })
-        .catch(function(error) {
-          // handle error
-          console.log(error);
-        });
-    });
-    
-  }
+  async asyncData({ store }) {
+            if (store.getters['items'].length) {
+                return
+            }
+            await store.dispatch('fetchItems')
+            return {}
+        },
+        computed: {
+            ...mapGetters(['items'])
+        }
 };
 </script>
  
