@@ -11,8 +11,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "ky": "^0.17.0",
+    "ky": "^0.18.0",
+    "ky-universal": "^0.5.0",
+    "memory-cache": "^0.2.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {

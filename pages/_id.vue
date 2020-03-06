@@ -16,11 +16,12 @@ export default {
     return { name: "World" };
   },
   computed: {
-    items() { return this.$store.state.items },
+    users() { return this.$store.state.users },
     data() {
-      const data = this.items.find(
+      const data = this.users.find(
         user => user.id == this.$route.params.id
       );
+      console.log('abc',data|| {})
       return data || {}
     }
   },
