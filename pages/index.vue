@@ -5,9 +5,9 @@
 </template>
 <script>
 import Logo from "~/components/Logo.vue";
-import axios from "~/plugins/ky.js";
 import { mapGetters, mapActions } from "vuex";
 import list from "~/components/list-user.vue";
+import { commit } from 'vuex-pathify'
 export default {
   components: {
     list
@@ -24,10 +24,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["users"])
+    ...mapGetters(["users", "firstUser"])
   },
   methods: {
-    ...mapActions({ getUsers: "fetchItems", setUsers: "setUsers" })
+    ...mapActions({ getUsers: "getListUsers", setUsers: "setListUsers" })
   }
 };
 </script>

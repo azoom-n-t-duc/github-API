@@ -1,37 +1,47 @@
 <template>
-<div>  
-  <h1 class="red">Hello {{ data.login }}!</h1>
-  <div>type: {{ data.type}}</div>
-  <div>contributions: {{ data.contributions }}</div>
-</div>
+  <div>
+    <h1 class="red">Hello {{ user.login }}!</h1>
+    <div>type: {{ user.type }}</div>
+    <div v-if="user.contributions">contributions: {{ user.contributions }}</div>
+  </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   layout: "home",
-  asyncData(context) {
-    // called every time before loading the component
-    // as the name said, it can be async
-    // Also, the returned object will be merged with your data object
-    return { name: "World" };
+  data() {
+    return {
+      user: {}
+    };
+  },
+  async mounted() {
+  
+  if (this.id !== null) {
+    const userDetail = await this.getUserDetail();
+    this.user = userDetail
+  } else {
+    const userCache = localStorage.getItem("users");
+    const users = JSON.parse(userCache);
+    this.setUser(users);
+    
+    users.forEach(element => {
+    const userName = this.$route.params.id;
+      if (userName === element.login) {
+        this.user = element
+      }
+    });
+  }
+    
+
+  },
+  methods: {
+    ...mapActions({ getUserDetail: "getUserDetail" , setUser:"setListUsers"})
   },
   computed: {
-    users() { return this.$store.state.users },
-    data() {
-      const data = this.users.find(
-        user => user.id == this.$route.params.id
-      );
-      console.log('abc',data|| {})
-      return data || {}
-    }
-  },
-  fetch() {
-    // The `fetch` method is used to fill the store before rendering the page
-  },
-  head() {
-    // Set Meta Tags for this Page
+    ...mapGetters(["users", "id"])
   }
-  // and more functionality to discover
 };
 </script>
 
