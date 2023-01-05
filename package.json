@@ -14,7 +14,7 @@
     "ky": "^0.18.0",
     "ky-universal": "^0.5.0",
     "memory-cache": "^0.2.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vuex-pathify": "^1.4.1"
   },
   "devDependencies": {
